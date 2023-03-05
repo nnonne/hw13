@@ -60,7 +60,7 @@ public class ToDo {
             System.out.println(e.getMessage());
         }
     }
-    public static List<ToDo> openedToDos(List<ToDo> todos) throws URISyntaxException, IOException, InterruptedException {
+    public static List<ToDo> openedToDos(List<ToDo> todos, int id) throws URISyntaxException, IOException, InterruptedException {
         HttpClient client = java.net.http.HttpClient.newHttpClient();
         String uri = "https://jsonplaceholder.typicode.com/users/1/todos";
         HttpRequest request =  HttpRequest.newBuilder()
@@ -71,7 +71,7 @@ public class ToDo {
         //System.out.println("Status Code: " + response.statusCode());
 
         return  todos.stream()
-                .filter(user->user.userId == user.userId & !user.completed)
+                .filter(user->user.userId == id & !user.completed)
                 .collect(Collectors.toList());
 
     }
